@@ -17,7 +17,7 @@ export const createPayment = async(req:Request,res:Response)=>{
         VALUES ($1,$2,$3,$4,$5)
         RETURNING *
         `;
-        const payment =  await db.query(query,[order_id,providerPaymentId,currency,amount,'received'])
+        const payment =  await db.query(query,[order_id,providerPaymentId,currency,amount,'pending'])
         return res.status(201).json({
             "status":true,
             "data":payment.rows[0],
