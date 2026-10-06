@@ -2,10 +2,12 @@ import express from "express";
 let app = express()
 import db from "./config/database.ts";
 import paymentroute  from "./routes/payment.route.ts";
+import webHookRoute from "./routes/webhook.route.ts";
 app.use(express.json())
 
 // payment routes 
 app.use('/payment',paymentroute);
+app.use('/webhook',webHookRoute)
 // connection check 
 app.get('/health',async(req,res)=>{
     try{
