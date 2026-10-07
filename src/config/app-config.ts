@@ -1,5 +1,8 @@
 import env from 'dotenv'
 env.config()
+if (process.env.WEBHOOK_SECRET == undefined) {
+    throw Error("Webhook scret is undefined!");
+}
 const APP_CONFIG = {
     DATABASE_URL: process.env.DATABASE_URL,
     REDIS_HOST: process.env.REDIS_HOST,

@@ -3,7 +3,12 @@ let app = express()
 import db from "./config/database.ts";
 import paymentroute  from "./routes/payment.route.ts";
 import webHookRoute from "./routes/webhook.route.ts";
-app.use(express.json())
+// keep the raw body so webhook signatures can be verified against the exact bytes received
+app.use(express.json({
+    verify: (req, _res, buf) => {
+        (req as typeof req & { rawBody?: Buffer }).rawBody = buf
+    }
+}))
 
 // payment routes 
 app.use('/payment',paymentroute);
