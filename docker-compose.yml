@@ -9,16 +9,17 @@ services:
       POSTGRES_PASSWORD: payment_password
       POSTGRES_DB: payment_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./src/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
   redis:
     image: redis:7
     container_name: payment_redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "6380:6379"
 
 volumes:
   postgres_data:
